@@ -1,21 +1,29 @@
+import React, { useState } from 'react';
+import People from '../../pages/People';
 import Header from '../header/Header';
-import ItemList from '../item-list/ItemList';
-import PersoneDetails from '../persone-details/PersoneDetails';
 import RandomPlanet from '../random-planet/RandomPlanet';
 
 function App() {
+  const [showRandomPlanet, setShowRandomPlanet] = useState(true);
+
+  const toggleRandomPlanet = () => {
+    setShowRandomPlanet((prevState) => !prevState);
+  };
+
   return (
     <>
       <div className='app container'>
         <Header />
-        <RandomPlanet />
+        {showRandomPlanet ? <RandomPlanet /> : null}
+
+        <button
+          className='toggle-planet btn btn-warning btn-lg'
+          onClick={toggleRandomPlanet}
+        >
+          Toggle Random Planet
+        </button>
         <div className='row mt-2'>
-          <div className='col-md-6'>
-            <ItemList />
-          </div>
-          <div className='col-md-6'>
-            <PersoneDetails />
-          </div>
+          <People />
         </div>
       </div>
     </>

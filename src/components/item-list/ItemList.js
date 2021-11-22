@@ -1,13 +1,19 @@
 import React from 'react';
 import './item-list.css';
 
-function ItemList() {
+function ItemList({ items }) {
   return (
-    <ul className='item-list list-group'>
-      <li className='list-group-item'>Luke Skywalker</li>
-      <li className='list-group-item'>Darth Vader</li>
-      <li className='list-group-item'>R2-D2</li>
-    </ul>
+    <div className='col-md-6'>
+      <ul className='item-list list-group'>
+        {items.map((item) => {
+          return (
+            <li key={item.id} className='list-group-item'>
+              {item.name}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
