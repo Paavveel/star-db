@@ -14,7 +14,13 @@ function People() {
 
   return (
     <RowBlock
-      left={<ItemList getData={getAllPeople} onItemSelected={onItemSelected} />}
+      left={
+        <ItemList
+          getData={getAllPeople}
+          renderItem={({ name }) => name}
+          onItemSelected={onItemSelected}
+        />
+      }
       right={<ItemDetails getData={getPerson} selectedId={selectedPerson} />}
     />
   );

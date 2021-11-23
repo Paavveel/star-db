@@ -3,7 +3,7 @@ import ErrorIndicator from '../error-indicator';
 import Spinner from '../spinner/Spinner';
 import './item-list.css';
 
-function ItemList({ getData, onItemSelected }) {
+function ItemList({ getData, renderItem, onItemSelected }) {
   const [items, setItems] = useState(null);
   const [error, setError] = useState(false);
 
@@ -32,14 +32,16 @@ function ItemList({ getData, onItemSelected }) {
 
   return (
     <ul className='item-list list-group'>
-      {items.map(({ id, name }) => {
+      {items.map((item) => {
+        const { id } = item;
+
         return (
           <li
             key={id}
             className='list-group-item'
             onClick={() => onItemSelected(id)}
           >
-            {name}
+            {renderItem(item)}
           </li>
         );
       })}

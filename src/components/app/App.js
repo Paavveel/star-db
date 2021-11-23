@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import People from '../../pages/People';
+import Planets from '../../pages/Planets';
+import Starships from '../../pages/Starships';
 import Header from '../header/Header';
 import RandomPlanet from '../random-planet/RandomPlanet';
 
@@ -24,6 +26,8 @@ function App() {
         </button>
 
         <People />
+        <Planets />
+        <Starships />
       </div>
     </>
   );
