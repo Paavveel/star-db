@@ -18,23 +18,27 @@ function RandomPlanet() {
   const updatePlanet = () => {
     const id = Math.floor(Math.random() * 25) + 3;
 
+    let cancelled = false;
     getPlanet(id)
       .then((planet) => {
-        setPlanet(planet);
-        setLoading(false);
+        if (!cancelled) {
+          setPlanet(planet);
+          setLoading(false);
+        }
       })
       .catch((err) => {
         setError(true);
         setLoading(false);
       });
+    return () => (cancelled = true);
   };
 
   useEffect(() => {
     updatePlanet();
-    console.log('use effect');
+
     let timerId = setInterval(updatePlanet, 3000);
+
     return () => {
-      console.log('clear');
       clearInterval(timerId);
     };
   }, []);

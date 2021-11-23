@@ -22,9 +22,8 @@ function App() {
         >
           Toggle Random Planet
         </button>
-        <div className='row mt-2'>
-          <People />
-        </div>
+
+        <People />
       </div>
     </>
   );

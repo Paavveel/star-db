@@ -1,32 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
 import ItemList from '../components/item-list/ItemList';
-import PersoneDetails from '../components/persone-details/PersoneDetails';
-import Spinner from '../components/spinner/Spinner';
-import { getAllPeople } from '../services/services';
+import ItemDetails from '../components/item-details/ItemDetails';
+import RowBlock from '../components/row-block/RowBlock';
+import { getAllPeople, getPerson } from '../services/services';
 
 function People() {
-  const [people, setPeople] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [selectedPerson, setSelectedPersone] = useState(null);
 
-  useEffect(() => {
-    getAllPeople()
-      .then((people) => {
-        // setPeople(people);
-        // setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-        setError(true);
-      });
-  }, []);
+  const onItemSelected = (id) => {
+    setSelectedPersone(id);
+  };
 
   return (
-    <>
-      {/* {loading ? <Spinner /> : null} */}
-      <ItemList items={people} />
-      <PersoneDetails />
-    </>
+    <RowBlock
+      left={<ItemList getData={getAllPeople} onItemSelected={onItemSelected} />}
+      right={<ItemDetails getData={getPerson} selectedId={selectedPerson} />}
+    />
   );
 }
 
