@@ -15,33 +15,31 @@ function RandomPlanet() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const updatePlanet = () => {
-    const id = Math.floor(Math.random() * 25) + 3;
-
-    let cancelled = false;
-    getPlanet(id)
-      .then((planet) => {
-        if (!cancelled) {
-          setPlanet(planet);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        setError(true);
-        setLoading(false);
-      });
-    return () => (cancelled = true);
-  };
-
   useEffect(() => {
-    updatePlanet();
+    let cancelled = false;
+    const updatePlanet = () => {
+      const id = Math.floor(Math.random() * 25) + 3;
 
-    let timerId = setInterval(updatePlanet, 3000);
+      getPlanet(id)
+        .then((planet) => {
+          if (!cancelled) {
+            setPlanet(planet);
+            setLoading(false);
+          }
+        })
+        .catch(() => {
+          setError(true);
+          setLoading(false);
+        });
+    };
+
+    let timerId = setInterval(updatePlanet, 7000);
 
     return () => {
       clearInterval(timerId);
+      cancelled = true;
     };
-  }, []);
+  }, [planet]);
 
   return (
     <div className='random-planet mt-5 mb-5'>

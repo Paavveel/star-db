@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import ItemList from '../components/item-list/ItemList';
-import ItemDetails from '../components/item-details/ItemDetails';
+import ItemDetails, { Field } from '../components/item-details/ItemDetails';
 import RowBlock from '../components/row-block/RowBlock';
 import { getAllPlanets, getPlanet } from '../services/services';
 
@@ -12,18 +12,23 @@ function Planets() {
     setSelectedPlanet(id);
   };
 
-  return (
-    <RowBlock
-      left={
-        <ItemList
-          getData={getAllPlanets}
-          renderItem={({ name }) => name}
-          onItemSelected={onItemSelected}
-        />
-      }
-      right={<ItemDetails getData={getPlanet} selectedId={selectedPlanet} />}
+  const planetList = (
+    <ItemList
+      getData={getAllPlanets}
+      renderItem={({ name }) => <span>{name}</span>}
+      onItemSelected={onItemSelected}
     />
   );
+
+  const planetDetails = (
+    <ItemDetails getData={getPlanet} selectedId={selectedPlanet}>
+      <Field field='population' label='Population:' />
+      <Field field='rotationPeriod' label='Rotation period:' />
+      <Field field='diameter' label='Diameter:' />
+    </ItemDetails>
+  );
+
+  return <RowBlock left={planetList} right={planetDetails} />;
 }
 
 export default Planets;

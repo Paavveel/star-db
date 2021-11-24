@@ -1,4 +1,5 @@
-const _apiBase = 'http://swapi.dev/api';
+const _apiBase = 'https://swapi.dev/api';
+const _imageBase = 'https://starwars-visualguide.com/assets/img';
 
 const getResource = async (url) => {
   const res = await fetch(`${_apiBase}${url}`);
@@ -49,15 +50,18 @@ const _transformPlanet = (planet) => {
   return {
     id: _extractId(planet),
     name: planet.name,
+    imageUrl: `${_imageBase}/planets/${_extractId(planet)}.jpg`,
     population: planet.population,
     rotationPeriod: planet.orbital_period,
     diameter: planet.diameter,
   };
 };
+
 const _transformStarship = (starship) => {
   return {
     id: _extractId(starship),
     model: starship.model,
+    imageUrl: `${_imageBase}/starships/${_extractId(starship)}.jpg`,
     manufacturer: starship.manufacturer,
     costInCredits: starship.cost_in_credits,
     length: starship.length,
@@ -66,10 +70,12 @@ const _transformStarship = (starship) => {
     cargoCapacity: starship.cargo_capacity,
   };
 };
+
 const _transformPerson = (person) => {
   return {
     id: _extractId(person),
     name: person.name,
+    imageUrl: `${_imageBase}/characters/${_extractId(person)}.jpg`,
     gender: person.gender,
     birthYear: person.birth_year,
     eyeColor: person.eye_color,
