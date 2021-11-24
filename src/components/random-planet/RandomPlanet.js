@@ -32,14 +32,14 @@ function RandomPlanet() {
           setLoading(false);
         });
     };
-
+    updatePlanet();
     let timerId = setInterval(updatePlanet, 7000);
 
     return () => {
       clearInterval(timerId);
       cancelled = true;
     };
-  }, [planet]);
+  }, []);
 
   return (
     <div className='random-planet mt-5 mb-5'>
