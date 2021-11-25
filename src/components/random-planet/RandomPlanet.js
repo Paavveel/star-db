@@ -33,7 +33,7 @@ function RandomPlanet() {
         });
     };
     updatePlanet();
-    let timerId = setInterval(updatePlanet, 7000);
+    let timerId = setInterval(updatePlanet, 5000);
 
     return () => {
       clearInterval(timerId);
